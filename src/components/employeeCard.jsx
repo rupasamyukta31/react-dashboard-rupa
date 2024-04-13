@@ -20,7 +20,7 @@ export default function MediaCard() {
 
       <CardMedia
         sx={{ height: 240, width: 240, backgroundSize: "contain", margin: "auto" }}
-        image="profile1.png"
+        image="/react-dashboard-rupa/profile1.png"
         title="profile image"
         />
    </Box>
