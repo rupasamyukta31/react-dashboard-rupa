@@ -13,40 +13,51 @@ import Stack from '@mui/material/Stack';
 
 
 
-export default function MediaCard() {
+export default function MediaCard({data}) {
+  /* console.log(data); */
   return (
-    <Card sx={{ maxWidth: 345}}>
-      <Box sx={{padding:2 }}>
-
-      <CardMedia
-        sx={{ height: 240, width: 240, backgroundSize: "contain", margin: "auto" }}
-        image="/react-dashboard-rupa/profile1.png"
-        title="profile image"
-        />
-   </Box>
-
-     
-
-      <CardContent>
-      <WbSunnyIcon />
-        <Typography gutterBottom variant="h5" component="div">
-         John Smith
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-       Department: UX/UI Design</Typography>
-       <Typography variant="body2" color="text.secondary">
-      Position: UX Design</Typography>
-      <Stack direction="row" spacing={1} sx={{marginTop: 2, justifyContent: "center"}} >
-      <Chip label="Figma" />
-      <Chip label="Adobe XD" />
-    </Stack>
-    <Stack direction="row" spacing={1}sx={{ marginTop: 1, justifyContent: "center"}}>
-      <Chip label="Active" variant="outlined" />
-      <Chip label="Hours: 20" variant="outlined" />
-    </Stack>
-      </CardContent>
-     
-    </Card>
+  <>
+      {data.map((item,index) => (
+        <Card sx={{ maxWidth: 345, margin:5}}>
+        <Box sx={{padding:2 }}>
+        <CardMedia
+          sx={{ height: 240, width: 240, backgroundSize: "contain", margin: "auto" }}
+          image={`/react-dashboard-rupa/${item.image}`}
+          title="profile image"
+          />
+     </Box>
+        <CardContent>
+        <WbSunnyIcon />
+          <Typography gutterBottom variant="h5" component="div">
+          {item.firstName} {item.lastName}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+         Department: UX/UI Design</Typography>
+         <Typography variant="body2" color="text.secondary">
+        Position: UX Design</Typography>
+        <Stack 
+        flexWrap="wrap"
+        direction="row" 
+        spacing={1} 
+        sx={{marginTop: 2, justifyContent: "center"}} >
+        {item.skills.map((skill, skillIndex) => (
+          <Chip sx={{marginTop:1}} key={skillIndex} label={skill} />
+        ))}
+      </Stack>
+      <Stack 
+      direction="row" 
+      
+      spacing={1}
+      sx={{ marginTop: 1, justifyContent: "center"}}>
+        <Chip label={item.onLeave ? "Inactive" : "Active"} 
+        variant="outlined" />
+        <Chip label={`Hours: ${item.hoursLoggedThisWeek}` }
+        variant="outlined" />
+      </Stack>
+        </CardContent>   
+      </Card>
+      )) }
+   </>
     
   );
 }
