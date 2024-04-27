@@ -7,16 +7,25 @@ import MediaCard from './components/employeeCard.jsx';
 import Data from './data/data.js';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Switch from '@mui/material/Switch';
 
 function App() {
-  const [onLeave, setLeave] = useState(true)
-console.log(onLeave)
+  const [showOnLeave, setShowOnLeave] = useState(false);
+console.log(showOnLeave);
+const filteredData = showOnLeave ? Data.filter((employee) => employee.onLeave) : Data;
+const toggleOnLeave = (event) => {if(showOnLeave) {setShowOnLeave(false)} else setShowOnLeave(true)};
   return (
     <Container fixed>
-<Button variant="contained"> Active</Button>
-<Button variant="outlined"> Inactive</Button>
-    <MediaCard data={Data} />
+      <Box>
+      <Typography variant="h4" component="h2">
+      Employee Dashboard
+</Typography>
+      </Box>
+<Switch onChange={toggleOnLeave}/>
+
+    <MediaCard data={filteredData} />
     </Container>
   );
 }
